@@ -1,7 +1,7 @@
-path: H:/Dev/OlhaBuraco/dataset_novo
-train: H:/Dev/OlhaBuraco/train/images
-val: H:/Dev/OlhaBuraco/valid/images
-test: H:/Dev/OlhaBuraco/test/images
+path: /home/ccomt/desenv/DetectorDeBuraco
+train: train/images
+val: valid/images
+test: test/images
 
 nc: 6
 names: ['buraco', 'remendo', 'rachadura crocodilo', 'rachadura longitudinal', 'rachadura obliqua', 'rachadura transversal']

@@ -4,7 +4,7 @@ if __name__ == '__main__':
     model = YOLO("runs/detect/olha_buraco3/weights/best.pt")
 
     results = model.predict(
-        source="H:\\VideosTeste\\video_teste.mp4",
+        source="/home/ccomt/desenv/DetectorDeBuraco/videos/video_teste.mp4",
         conf=0.3,
         save=True,
         stream=True,

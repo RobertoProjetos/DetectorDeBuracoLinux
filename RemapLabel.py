@@ -11,16 +11,16 @@ REMAP = {
 }
 
 PASTAS = [
-    "H:/Dev/OlhaBuraco/train/labels",
-    "H:/Dev/OlhaBuraco/valid/labels",
-    "H:/Dev/OlhaBuraco/test/labels",
+   "/home/ccomt/desenv/DetectorDeBuraco/train/labels",
+    "/home/ccomt/desenv/DetectorDeBuraco/valid/labels",
+    "/home/ccomt/desenv/DetectorDeBuraco/test/labels",
 ]
 
 # Mapeamento para seus backups existentes
 BACKUP_EXISTENTE = {
-    "H:/Dev/OlhaBuraco/train/labels": "H:/Dev/OlhaBuraco/backup_labels/train",
-    "H:/Dev/OlhaBuraco/valid/labels": None,  # sem backup → vai criar
-    "H:/Dev/OlhaBuraco/test/labels":  None,  # sem backup → vai criar
+  "/home/ccomt/desenv/DetectorDeBuraco/train/labels": None,
+    "/home/ccomt/desenv/DetectorDeBuraco/valid/labels": None,
+    "/home/ccomt/desenv/DetectorDeBuraco/test/labels":  None,
 }
 
 # Verificação/criação de backups
