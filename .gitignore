@@ -10,6 +10,8 @@ test/labels/
 test/labels_backup/
 backup_labels/
 dataset_novo/
+ImagensDeTreino/
+videos/
 
 # Resultados de treinamento YOLOv8
 runs/
