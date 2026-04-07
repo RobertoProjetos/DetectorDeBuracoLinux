@@ -2,12 +2,9 @@ import cv2
 import os
 import sys
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Configurar caminhos do video fonte e diretório de saída
-VIDEO_PATH = os.path.join(BASE_DIR, "videos", "video_teste.mp4")
-OUTPUT_DIR = os.path.join(BASE_DIR, "dataset_novo", "images", "train")
-INTERVALO = 10  # coleta 1 imagem a cada 10 frames
+VIDEO_PATH = os.environ.get("VIDEO_PATH", "videos/video_teste.mp4")
+OUTPUT_DIR = os.environ.get("OUTPUT_DIR", "dataset_novo/images/train")
+INTERVALO  = int(os.environ.get("INTERVALO", 10))
 
 # Tratamento caso eu tenha esquecido de colocar o vídeo ou o caminho esteja errado
 if not os.path.exists(VIDEO_PATH):

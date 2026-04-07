@@ -2,19 +2,14 @@ from ultralytics import YOLO
 import os
 
 if __name__ == '__main__':
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    
-    # Caminho para o modelo treinado (ajuste o nome conforme necessário)
-    MODEL_PATH = os.path.join(BASE_DIR, "runs", "detect", "olha_buraco3", "weights", "best.pt")
-    
-    # Caminho para o vídeo de teste (ajuste conforme necessário)
-    VIDEO_PATH = os.path.join(BASE_DIR, "videos", "video_teste.mp4")
-    
-    model = YOLO(MODEL_PATH)
+    model_path = os.environ.get("MODEL_PATH", "runs/detect/olha_buraco/weights/best.pt")
+    video_path = os.environ.get("VIDEO_PATH", "videos/video_teste.mp4")
+
+    model = YOLO(model_path)
 
     results = model.predict(
-        source=VIDEO_PATH,
-        conf=0.3,
+        source=video_path,
+        conf=float(os.environ.get("CONFIANCA", 0.3)),
         save=True,
         stream=True,
     )

@@ -6,10 +6,27 @@ services:
     runtime: nvidia
     environment:
       - NVIDIA_VISIBLE_DEVICES=all
+      - DATA_YAML=/app/data.yaml
+      - EPOCHS=150
     volumes:
-      - /caminho/no/servidor/train:/app/train
-      - /caminho/no/servidor/valid:/app/valid
-      - /caminho/no/servidor/test:/app/test
-      - /caminho/no/servidor/runs:/app/runs
+      - ./videos:/app/videos           # coloque seus vídeos aqui
+      - ./train:/app/train
+      - ./valid:/app/valid
+      - ./test:/app/test
+      - ./runs:/app/runs
     shm_size: '8gb'
+    restart: "no"
+
+  deteccao:
+    build: .
+    runtime: nvidia
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - VIDEO_PATH=/app/videos/video_teste.mp4
+      - MODEL_PATH=/app/runs/detect/olha_buraco/weights/best.pt
+      - CONFIANCA=0.3
+    volumes:
+      - ./videos:/app/videos
+      - ./runs:/app/runs
+    command: python detect.py
     restart: "no"
