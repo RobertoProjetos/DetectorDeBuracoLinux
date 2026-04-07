@@ -1,6 +1,8 @@
 import os
 import shutil
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 REMAP = {
     0: 2,  # Alligator crack    → rachadura crocodilo
     1: 3,  # Longitudinal crack → rachadura longitudinal
@@ -11,34 +13,33 @@ REMAP = {
 }
 
 PASTAS = [
-   "/home/ccomt/desenv/DetectorDeBuraco/train/labels",
-    "/home/ccomt/desenv/DetectorDeBuraco/valid/labels",
-    "/home/ccomt/desenv/DetectorDeBuraco/test/labels",
+    os.path.join(BASE_DIR, "train", "labels"),
+    os.path.join(BASE_DIR, "valid", "labels"),
+    os.path.join(BASE_DIR, "test", "labels"),
 ]
 
-# Mapeamento para seus backups existentes
 BACKUP_EXISTENTE = {
-  "/home/ccomt/desenv/DetectorDeBuraco/train/labels": None,
-    "/home/ccomt/desenv/DetectorDeBuraco/valid/labels": None,
-    "/home/ccomt/desenv/DetectorDeBuraco/test/labels":  None,
+    os.path.join(BASE_DIR, "train", "labels"): None,
+    os.path.join(BASE_DIR, "valid", "labels"): None,
+    os.path.join(BASE_DIR, "test", "labels"): None,
 }
 
-# Verificação/criação de backups
 for pasta in PASTAS:
     backup_existente = BACKUP_EXISTENTE.get(pasta)
 
     if backup_existente and os.path.exists(backup_existente):
-        print(f" Backup já existe em: {backup_existente} — pulando criação")
+        print(f"Backup já existe em: {backup_existente} — pulando criação")
     else:
-        backup_novo = pasta.replace("/labels", "/labels_backup")
+        pasta_pai = os.path.dirname(pasta)
+        backup_novo = os.path.join(pasta_pai, "labels_backup")
         if os.path.exists(pasta) and not os.path.exists(backup_novo):
             shutil.copytree(pasta, backup_novo)
-            print(f" Backup criado em: {backup_novo}")
+            print(f"Backup criado em: {backup_novo}")
 
 # Remapeamento
 for pasta in PASTAS:
     if not os.path.exists(pasta):
-        print(f" Pasta não encontrada: {pasta}")
+        print(f"Pasta não encontrada: {pasta}")
         continue
 
     arquivos = [f for f in os.listdir(pasta) if f.endswith(".txt")]
@@ -61,11 +62,11 @@ for pasta in PASTAS:
                     partes[0] = str(id_novo)
                     novas_linhas.append(" ".join(partes))
                 else:
-                    print(f"  ID desconhecido {id_antigo} em {arquivo}")
+                    print(f" ID desconhecido {id_antigo} em {arquivo}")
 
         with open(caminho, "w") as f:
             f.write("\n".join(novas_linhas))
 
-    print(f" Concluído: {pasta}")
+    print(f"Concluído: {pasta}")
 
 print("\n Remapeamento finalizado!")
